@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       "Shorten",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
