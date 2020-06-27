@@ -127,13 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class MyDialogBox extends StatelessWidget {
   final String title, description, buttonText;
-  final Image image;
 
   MyDialogBox({
     @required this.title,
     @required this.description,
     @required this.buttonText,
-    this.image,
   });
 
   @override
