@@ -93,7 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   RaisedButton(
                     child: Text(
                       "Shorten",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     onPressed: () {},
                     color: Colors.blueAccent,
