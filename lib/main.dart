@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -100,15 +102,48 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => MyDialogBox(
-                          title: "Success",
-                          description:
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                          buttonText: "Okay",
-                        ),
+                      Future<dynamic> makeRequest(myurl) async {
+                        var data;
+                        String url = 'https://rel.ink/api/links/';
+                        var response = await http.post(
+                          Uri.encodeFull(url),
+                          body: {"url": "$myurl"},
+                        );
+                        data = jsonDecode(response.body);
+                        print(data.toString());
+                        return data;
+                      }
+
+                      return FutureBuilder(
+                        future: makeRequest("https://news.ycombinator.com/"),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> dataSnap) {
+                          if (dataSnap.hasData) {
+                            print(dataSnap.data);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => MyDialogBox(
+                                title: "Success",
+                                description:
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                buttonText: "Okay",
+                              ),
+                            );
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
                       );
+
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) => MyDialogBox(
+                      //     title: "Success",
+                      //     description:
+                      //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                      //     buttonText: "Okay",
+                      //   ),
+                      // );
                     },
                     color: Colors.blueAccent,
                   ),
@@ -206,7 +241,7 @@ class MyDialogBox extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.green,
             radius: 66,
-            child: Icon(Icons.check,size: 70,color: Colors.white),
+            child: Icon(Icons.check, size: 70, color: Colors.white),
           ),
         ),
       ],
