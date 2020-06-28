@@ -115,13 +115,32 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    onPressed: () async{
-                      var mydata = await makeRequest("https://news.ycombinator.com/");
+                    onPressed: () async {
+                      var mydata =
+                          await makeRequest("https://news.ycombinator.com/");
                       print(mydata.toString());
-                      if (mydata == null) {
-                        print("This is NULL");
-                      } else if (mydata != null) {
+                      if (mydata != null) {
                         print("I have data");
+                        showModalBottomSheet<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(32.0),
+                                  child: Text(
+                                    'This is the modal bottom sheet. Slide down to dismiss.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: 24.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      }
+                      else{
+                        print("Null");
                       }
 
                       // showDialog(
