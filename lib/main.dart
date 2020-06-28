@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        canvasColor: Colors.transparent,
+      ),
       home: MyHomePage(),
     );
   }
@@ -125,21 +128,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             context: context,
                             builder: (BuildContext context) {
                               return Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    'This is the modal bottom sheet. Slide down to dismiss.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 24.0,
+                                child: Container(
+                                  decoration: new BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: new BorderRadius.only(
+                                      topLeft: const Radius.circular(25.0),
+                                      topRight: const Radius.circular(25.0),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(32.0),
+                                    child: Text(
+                                      'This is the modal bottom sheet. Slide down to dismiss.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 24.0,
+                                      ),
                                     ),
                                   ),
                                 ),
                               );
                             });
-                      }
-                      else{
+                      } else {
                         print("Null");
                       }
 
