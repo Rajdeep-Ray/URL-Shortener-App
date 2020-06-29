@@ -119,14 +119,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => MyDialogBox(),
-                      );
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) => MyDialogBox(
+                      //     title: "Success",
+                      //     description:
+                      //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                      //     buttonText: "Okay",
+                      //   ),
+                      // );
                       var mydata =
                           await makeRequest("https://news.ycombinator.com/");
                       print(mydata.toString());
-                      Navigator.pop(context);
+                      //Navigator.pop(context);
                       if (mydata != null) {
                         print("I have data");
                         showModalBottomSheet<void>(
@@ -174,34 +179,91 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyDialogBox extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      elevation: 5,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-            topLeft: const Radius.circular(10.0),
-            topRight: const Radius.circular(10.0),
-            bottomLeft: const Radius.circular(10.0),
-            bottomRight: const Radius.circular(10.0),
-          ),
-        ),
-        child: ListTile(
-          leading: CircularProgressIndicator(),
-          title: Text(
-            "\tConverting...",
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class MyDialogBox extends StatelessWidget {
+//   final String title, description, buttonText;
+
+//   MyDialogBox({
+//     @required this.title,
+//     @required this.description,
+//     @required this.buttonText,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(20),
+//       ),
+//       elevation: 0.0,
+//       backgroundColor: Colors.transparent,
+//       child: _dialogContent(context),
+//     );
+//   }
+
+//   _dialogContent(BuildContext context) {
+//     return Stack(
+//       children: [
+//         Container(
+//           padding: EdgeInsets.only(
+//             top: 82,
+//             bottom: 16,
+//             left: 16,
+//             right: 16,
+//           ),
+//           margin: EdgeInsets.only(top: 66),
+//           decoration: new BoxDecoration(
+//             color: Colors.white,
+//             shape: BoxShape.rectangle,
+//             borderRadius: BorderRadius.circular(16),
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.black26,
+//                 blurRadius: 10.0,
+//                 offset: const Offset(0.0, 10.0),
+//               ),
+//             ],
+//           ),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min, // To make the card compact
+//             children: <Widget>[
+//               Text(
+//                 title,
+//                 style: TextStyle(
+//                   fontSize: 24.0,
+//                   fontWeight: FontWeight.w700,
+//                 ),
+//               ),
+//               SizedBox(height: 16.0),
+//               Text(
+//                 description,
+//                 textAlign: TextAlign.center,
+//                 style: TextStyle(
+//                   fontSize: 16.0,
+//                 ),
+//               ),
+//               SizedBox(height: 24.0),
+//               Align(
+//                 alignment: Alignment.bottomRight,
+//                 child: FlatButton(
+//                   onPressed: () {
+//                     Navigator.of(context).pop(); // To close the dialog
+//                   },
+//                   child: Text(buttonText),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         Positioned(
+//           left: 10,
+//           right: 10,
+//           child: CircleAvatar(
+//             backgroundColor: Colors.green,
+//             radius: 66,
+//             child: Icon(Icons.check, size: 70, color: Colors.white),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
