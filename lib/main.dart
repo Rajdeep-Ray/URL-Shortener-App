@@ -11,9 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        canvasColor: Colors.transparent,
-      ),
       home: MyHomePage(),
     );
   }
@@ -39,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return data;
   }
 
-  final _urlInputController=TextEditingController();
+  final _urlInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     onPressed: () async {
+                      print(_urlInputController.text);
                       showDialog(
                         context: context,
                         builder: (BuildContext context) => MyDialogBox(),
@@ -131,26 +129,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (mydata != null) {
                         Navigator.pop(context);
                         showModalBottomSheet<void>(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(25),
+                              ),
+                            ),
                             context: context,
                             builder: (BuildContext context) {
                               return Container(
-                                child: Container(
-                                  decoration: new BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: new BorderRadius.only(
-                                      topLeft: const Radius.circular(25.0),
-                                      topRight: const Radius.circular(25.0),
-                                    ),
+                                decoration: new BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: new BorderRadius.only(
+                                    topLeft: const Radius.circular(25.0),
+                                    topRight: const Radius.circular(25.0),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(32.0),
-                                    child: Text(
-                                      'This is the modal bottom sheet. Slide down to dismiss.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Theme.of(context).accentColor,
-                                        fontSize: 24.0,
-                                      ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(32.0),
+                                  child: Text(
+                                    'This is the modal bottom sheet. Slide down to dismiss.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: 24.0,
                                     ),
                                   ),
                                 ),
@@ -199,7 +200,7 @@ class MyDialogBox extends StatelessWidget {
           leading: CircularProgressIndicator(),
           title: Text(
             "\tConverting...",
-            style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
       ),
