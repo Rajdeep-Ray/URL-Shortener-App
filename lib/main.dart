@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           // fontWeight: FontWeight.w500,
                         ),
                         decoration: InputDecoration(
-                          hintText: "Enter URL",
+                          hintText: "Paste URL",
                           hintStyle: TextStyle(fontSize: 18),
                           icon: Icon(
                             Icons.link,
