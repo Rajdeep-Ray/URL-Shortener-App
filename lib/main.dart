@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       child: TextFormField(
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                           // fontWeight: FontWeight.w500,
                         ),
                         decoration: InputDecoration(
@@ -125,8 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       var mydata =
                           await makeRequest("https://news.ycombinator.com/");
-                      Navigator.pop(context);
                       if (mydata != null) {
+                        Navigator.pop(context);
                         showModalBottomSheet<void>(
                             context: context,
                             builder: (BuildContext context) {
