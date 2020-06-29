@@ -39,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return data;
   }
 
+  final _urlInputController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.white,
                       ),
                       child: TextFormField(
+                        controller: _urlInputController,
                         style: TextStyle(
                           fontSize: 20,
                           // fontWeight: FontWeight.w500,
