@@ -198,7 +198,7 @@ class MyDialogBox extends StatelessWidget {
           leading: CircularProgressIndicator(),
           title: Text(
             "\tConverting...",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
           ),
         ),
       ),
