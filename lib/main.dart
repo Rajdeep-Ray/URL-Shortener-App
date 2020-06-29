@@ -119,9 +119,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     onPressed: () async {
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) => MyDialogBox(
+                      //     title: "Success",
+                      //     description:
+                      //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                      //     buttonText: "Okay",
+                      //   ),
+                      // );
                       var mydata =
                           await makeRequest("https://news.ycombinator.com/");
                       print(mydata.toString());
+                      //Navigator.pop(context);
                       if (mydata != null) {
                         print("I have data");
                         showModalBottomSheet<void>(
@@ -153,16 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       } else {
                         print("Null");
                       }
-
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) => MyDialogBox(
-                      //     title: "Success",
-                      //     description:
-                      //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      //     buttonText: "Okay",
-                      //   ),
-                      // );
                     },
                     color: Colors.blueAccent,
                   ),
