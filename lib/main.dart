@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       data = jsonDecode(response.body);
     });
-    //print(data.toString());
+    print(data.toString());
     return data;
   }
 
@@ -125,10 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                       var mydata =
                           await makeRequest("https://news.ycombinator.com/");
-                      print(mydata.toString());
                       Navigator.pop(context);
                       if (mydata != null) {
-                        print("I have data");
                         showModalBottomSheet<void>(
                             context: context,
                             builder: (BuildContext context) {
