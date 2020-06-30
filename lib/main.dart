@@ -125,8 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (BuildContext context) => MyDialogBox(),
                       );
                       var mydata =
-                          await makeRequest("https://news.ycombinator.com/");
-                      if (mydata != null) {
+                          await makeRequest("https//news.ycombinator.com/");
+                      print(mydata['url'].toString());
+                      if (mydata != null && mydata['hashid'] != null) {
                         Navigator.pop(context);
                         showModalBottomSheet<void>(
                             shape: RoundedRectangleBorder(
@@ -157,7 +158,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               );
                             });
+                      } else if (mydata != null && mydata['hashid'] == null) {
+                        print("object");
                       } else {
+                        Navigator.pop(context);
                         print("Null");
                       }
                     },
