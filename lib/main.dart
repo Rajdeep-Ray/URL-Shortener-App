@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (BuildContext context) => MyDialogBox(),
                       );
                       var mydata =
-                          await makeRequest("https//news.ycombinator.com/");
+                          await makeRequest("https://news.ycombinator.com/");
                       print(mydata['url'].toString());
                       if (mydata != null && mydata['hashid'] != null) {
                         Navigator.pop(context);
