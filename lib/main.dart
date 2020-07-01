@@ -151,14 +151,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(
-                                        'https://rel.ink/${mydata['hashid']}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xFF4e54c8),
-                                          fontSize: 24,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: Text(
+                                          'https://rel.ink/${mydata['hashid']}',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Color(0xFF4e54c8),
+                                            fontSize: 24,
+                                          ),
                                         ),
                                       ),
+                                      Divider(),
                                       FlatButton(
                                         onPressed: () {},
                                         child: Padding(
@@ -176,7 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                               SizedBox(
                                                 width: 5,
                                               ),
-                                              Text("Copy"),
+                                              Text(
+                                                "Copy",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -202,7 +209,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                               SizedBox(
                                                 width: 5,
                                               ),
-                                              Text("Share"),
+                                              Text(
+                                                "Share",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -298,13 +308,14 @@ class MyErrorDialogBox extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             Icons.error_outline,
-            size: 30,
+            size: 50,
             color: Colors.red,
           ),
           title: Text(
-            "\tError",
+            "ERROR",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
+          subtitle: Text("Enter a valid URL"),
         ),
       ),
     );
