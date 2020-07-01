@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -152,8 +153,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 10),
-                                        child: Text(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: SelectableText(
                                           'https://rel.ink/${mydata['hashid']}',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -162,9 +164,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ),
                                       ),
-                                      Divider(),
+                                      Divider(
+                                        thickness: 2,
+                                      ),
                                       FlatButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Clipboard.setData(
+                                            ClipboardData(
+                                              text:
+                                                  'https://rel.ink/${mydata['hashid']}',
+                                            ),
+                                          );
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                MyCopiedDialogBox(),
+                                          );
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 8,
@@ -316,6 +332,42 @@ class MyErrorDialogBox extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
           subtitle: Text("Enter a valid URL"),
+        ),
+      ),
+    );
+  }
+}
+
+class MyCopiedDialogBox extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 5,
+      backgroundColor: Colors.transparent,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(10.0),
+            topRight: const Radius.circular(10.0),
+            bottomLeft: const Radius.circular(10.0),
+            bottomRight: const Radius.circular(10.0),
+          ),
+        ),
+        child: ListTile(
+          leading: Icon(
+            Icons.check,
+            size: 50,
+            color: Colors.green,
+          ),
+          title: Text(
+            "Copied",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
         ),
       ),
     );
