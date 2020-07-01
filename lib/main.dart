@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 void main() {
   runApp(MyApp());
@@ -210,7 +211,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                       ),
                                       FlatButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Share.share('https://rel.ink/${mydata['hashid']}');
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 8,
