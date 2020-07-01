@@ -121,11 +121,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       print(_urlInputController.text);
                       showDialog(
+                        barrierDismissible: false,
                         context: context,
-                        builder: (BuildContext context) => MyDialogBox(),
+                        builder: (BuildContext context) => MyConnectDialogBox(),
                       );
                       var mydata =
-                          await makeRequest("https://news.ycombinator.com/");
+                          await makeRequest("${_urlInputController.text}");
                       print(mydata['url'].toString());
                       if (mydata != null && mydata['hashid'] != null) {
                         Navigator.pop(context);
@@ -147,19 +148,81 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    'This is the modal bottom sheet. Slide down to dismiss.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 24.0,
-                                    ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'https://rel.ink/${mydata['hashid']}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color(0xFF4e54c8),
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.content_copy,
+                                                color: Color(0xFF4e54c8),
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Copy"),
+                                            ],
+                                          ),
+                                        ),
+                                        textColor: Color(0xFF4e54c8),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.share,
+                                                color: Color(0xFF4e54c8),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Share"),
+                                            ],
+                                          ),
+                                        ),
+                                        textColor: Color(0xFF4e54c8),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );
                             });
                       } else if (mydata != null && mydata['hashid'] == null) {
-                        print("object");
+                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => MyErrorDialogBox(),
+                        );
                       } else {
                         Navigator.pop(context);
                         print("Null");
@@ -180,7 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyDialogBox extends StatelessWidget {
+class MyConnectDialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -204,6 +267,42 @@ class MyDialogBox extends StatelessWidget {
           leading: CircularProgressIndicator(),
           title: Text(
             "\tConverting...",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyErrorDialogBox extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 5,
+      backgroundColor: Colors.transparent,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(10.0),
+            topRight: const Radius.circular(10.0),
+            bottomLeft: const Radius.circular(10.0),
+            bottomRight: const Radius.circular(10.0),
+          ),
+        ),
+        child: ListTile(
+          leading: Icon(
+            Icons.error_outline,
+            size: 30,
+            color: Colors.red,
+          ),
+          title: Text(
+            "\tError",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
